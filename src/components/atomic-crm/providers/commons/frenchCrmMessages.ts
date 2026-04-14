@@ -371,6 +371,27 @@ export const frenchCrmMessages = {
         name_placeholder: "Saisir le nom de l'étiquette",
       },
     },
+    tondeuses: {
+      name: "Tondeuse |||| Tondeuses",
+      forcedCaseName: "Tondeuse",
+      fields: {
+        nom: "Nom",
+        prix: "Prix",
+        description: "Description",
+        actif: "Actif",
+        date_creation: "Date de création",
+        date_fin: "Date de fin",
+      },
+      action: {
+        create: "Créer une tondeuse",
+        edit: "Modifier la tondeuse",
+        show: "Afficher la tondeuse",
+      },
+      actif_status: {
+        active: "Actif",
+        inactive: "Inactif",
+      },
+    },
   },
   crm: {
     action: {
