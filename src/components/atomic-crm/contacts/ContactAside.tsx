@@ -1,4 +1,4 @@
-import { useRecordContext, useTranslate } from "ra-core";
+import { CanAccess, useRecordContext, useTranslate } from "ra-core";
 import { EditButton } from "@/components/admin/edit-button";
 import { DeleteButton } from "@/components/admin";
 import { ReferenceManyField } from "@/components/admin/reference-many-field";
@@ -73,12 +73,14 @@ export const ContactAside = ({ link = "edit" }: { link?: "edit" | "show" }) => {
             <ExportVCardButton />
             <ContactMergeButton />
           </div>
-          <div className="mt-6 pt-6 border-t hidden sm:flex flex-col gap-2 items-start">
-            <DeleteButton
-              className="h-6 cursor-pointer hover:bg-destructive/10! text-destructive! border-destructive! focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40"
-              size="sm"
-            />
-          </div>
+          <CanAccess resource="contacts" action="delete">
+            <div className="mt-6 pt-6 border-t hidden sm:flex flex-col gap-2 items-start">
+              <DeleteButton
+                className="h-6 cursor-pointer hover:bg-destructive/10! text-destructive! border-destructive! focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40"
+                size="sm"
+              />
+            </div>
+          </CanAccess>
         </>
       )}
     </div>

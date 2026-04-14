@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { MoreVertical } from "lucide-react";
 import {
+  useCanAccess,
   useDeleteWithUndoController,
   useGetRecordRepresentation,
   useNotify,
@@ -34,6 +35,10 @@ export const Task = ({
 }) => {
   const isMobile = useIsMobile();
   const { taskTypes } = useConfigurationContext();
+  const { canAccess: canDelete } = useCanAccess({
+    resource: "tasks",
+    action: "delete",
+  });
   const notify = useNotify();
   const translate = useTranslate();
   const queryClient = useQueryClient();
@@ -199,12 +204,14 @@ export const Task = ({
             >
               {translate("ra.action.edit")}
             </DropdownMenuItem>
-            <DropdownMenuItem
-              className="cursor-pointer h-12 md:h-8 px-4 md:px-2 text-base md:text-sm"
-              onClick={handleDelete}
-            >
-              {translate("ra.action.delete")}
-            </DropdownMenuItem>
+            {canDelete && (
+              <DropdownMenuItem
+                className="cursor-pointer h-12 md:h-8 px-4 md:px-2 text-base md:text-sm"
+                onClick={handleDelete}
+              >
+                {translate("ra.action.delete")}
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

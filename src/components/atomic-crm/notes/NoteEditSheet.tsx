@@ -1,6 +1,7 @@
 import { EllipsisVertical, Trash2 } from "lucide-react";
 import {
   type Identifier,
+  useCanAccess,
   useCreatePath,
   useDeleteController,
   useGetRecordRepresentation,
@@ -84,6 +85,10 @@ const NoteEditMenuButton = ({
 }) => {
   const translate = useTranslate();
   const record = useRecordContext();
+  const { canAccess: canDelete } = useCanAccess({
+    resource: "contact_notes",
+    action: "delete",
+  });
   const { handleDelete } = useDeleteController({
     record,
     resource: "contact_notes",
@@ -110,14 +115,16 @@ const NoteEditMenuButton = ({
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          variant="destructive"
-          className="h-12 md:h-8 px-4 md:px-2 text-base md:text-sm"
-          onSelect={onDelete}
-        >
-          <Trash2 />
-          {translate("ra.action.delete")}
-        </DropdownMenuItem>
+        {canDelete && (
+          <DropdownMenuItem
+            variant="destructive"
+            className="h-12 md:h-8 px-4 md:px-2 text-base md:text-sm"
+            onSelect={onDelete}
+          >
+            <Trash2 />
+            {translate("ra.action.delete")}
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

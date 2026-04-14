@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { isValid } from "date-fns";
 import { Archive, ArchiveRestore } from "lucide-react";
 import {
+  CanAccess,
   InfiniteListBase,
   ShowBase,
   useDataProvider,
@@ -74,7 +75,9 @@ const DealShowContent = () => {
               {record.archived_at ? (
                 <>
                   <UnarchiveButton record={record} />
-                  <DeleteButton />
+                  <CanAccess resource="deals" action="delete">
+                    <DeleteButton />
+                  </CanAccess>
                 </>
               ) : (
                 <>

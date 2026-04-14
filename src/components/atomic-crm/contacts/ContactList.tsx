@@ -1,5 +1,6 @@
 import jsonExport from "jsonexport/dist";
 import {
+  CanAccess,
   downloadCSV,
   InfiniteListBase,
   useGetIdentity,
@@ -80,7 +81,9 @@ const ContactBulkActionButtons = () => (
     <SelectAllButton />
     <BulkTagButton />
     <BulkExportButton />
-    <BulkDeleteButton />
+    <CanAccess resource="contacts" action="delete">
+      <BulkDeleteButton />
+    </CanAccess>
   </>
 );
 
