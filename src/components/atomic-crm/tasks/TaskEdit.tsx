@@ -1,4 +1,5 @@
 import {
+  CanAccess,
   EditBase,
   Form,
   useNotify,
@@ -55,18 +56,20 @@ export const TaskEdit = ({
               </DialogHeader>
               <TaskFormContent />
               <DialogFooter className="w-full sm:justify-between gap-4">
-                <DeleteButton
-                  mutationOptions={{
-                    onSuccess: () => {
-                      close();
-                      notify("resources.tasks.deleted", {
-                        type: "info",
-                        undoable: true,
-                      });
-                    },
-                  }}
-                  redirect={false}
-                />
+                <CanAccess resource="tasks" action="delete">
+                  <DeleteButton
+                    mutationOptions={{
+                      onSuccess: () => {
+                        close();
+                        notify("resources.tasks.deleted", {
+                          type: "info",
+                          undoable: true,
+                        });
+                      },
+                    }}
+                    redirect={false}
+                  />
+                </CanAccess>
                 <SaveButton label="ra.action.save" />
               </DialogFooter>
             </Form>

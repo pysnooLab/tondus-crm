@@ -1,5 +1,10 @@
 import type { Identifier } from "ra-core";
-import { useTranslate, useDeleteController, useRecordContext } from "ra-core";
+import {
+  useCanAccess,
+  useTranslate,
+  useDeleteController,
+  useRecordContext,
+} from "ra-core";
 import { EllipsisVertical, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -53,6 +58,10 @@ const ContactEditMenuButton = ({
 }) => {
   const translate = useTranslate();
   const record = useRecordContext();
+  const { canAccess: canDelete } = useCanAccess({
+    resource: "contacts",
+    action: "delete",
+  });
   const { handleDelete } = useDeleteController({
     record,
     resource: "contacts",
@@ -76,14 +85,16 @@ const ContactEditMenuButton = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          variant="destructive"
-          className="h-12 md:h-8 px-4 md:px-2 text-base md:text-sm"
-          onSelect={onDelete}
-        >
-          <Trash2 />
-          {translate("ra.action.delete")}
-        </DropdownMenuItem>
+        {canDelete && (
+          <DropdownMenuItem
+            variant="destructive"
+            className="h-12 md:h-8 px-4 md:px-2 text-base md:text-sm"
+            onSelect={onDelete}
+          >
+            <Trash2 />
+            {translate("ra.action.delete")}
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

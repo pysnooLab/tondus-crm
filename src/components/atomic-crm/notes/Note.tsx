@@ -1,6 +1,7 @@
 import { CircleX, Edit, Save, Trash2 } from "lucide-react";
 import {
   Form,
+  useCanAccess,
   useDelete,
   useGetIdentity,
   useNotify,
@@ -43,6 +44,10 @@ export const Note = ({
   const [isTruncated, setTruncated] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const resource = useResourceContext();
+  const { canAccess: canDelete } = useCanAccess({
+    resource,
+    action: "delete",
+  });
   const notify = useNotify();
   const translate = useTranslate();
   const { identity } = useGetIdentity();
@@ -139,23 +144,25 @@ export const Note = ({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleDelete}
-                  className="p-1 h-auto cursor-pointer"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{translate("resources.notes.action.delete")}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          {canDelete && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleDelete}
+                    className="p-1 h-auto cursor-pointer"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{translate("resources.notes.action.delete")}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </span>
         <div className="flex-1"></div>
         <span className="text-sm text-muted-foreground">
