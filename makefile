@@ -151,3 +151,20 @@ registry-gen: ## Generate the shadcn registry (ran automatically by a pre-commit
 
 storybook: ## start storybook
 	npm run storybook
+
+TASK ?= $(error TASK is required)
+NAME ?= $(error NAME is required)
+
+spin: ## create worktree + branch + node_modules symlink
+	git worktree add worktrees/$(TASK) -b $(NAME)
+	cd worktrees/$(TASK) && ln -s ../../node_modules node_modules
+
+merge: ## rebase onto main + push + open PR
+	cd worktrees/$(TASK) && \
+	git rebase main && \
+	git push origin HEAD && \
+	gh pr create --title "$(TITLE)" --body "" --base main
+
+clean: ## delete worktree and branch after confirmed merge
+	git worktree remove worktrees/$(TASK) --force
+	git branch -D $(NAME) 2>/dev/null || true
