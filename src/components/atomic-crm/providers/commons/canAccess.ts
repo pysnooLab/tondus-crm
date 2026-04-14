@@ -17,6 +17,11 @@ export const canAccess = <
     return true;
   }
 
+  // Non admins can't delete any resource
+  if (params.action === "delete") {
+    return false;
+  }
+
   // Non admins can't access the sales resource
   if (params.resource === "sales") {
     return false;
