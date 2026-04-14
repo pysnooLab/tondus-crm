@@ -59,7 +59,7 @@ export const i18nProvider = polyglotI18nProvider(
     }
     return englishCatalog;
   },
-  getInitialLocale(),
+  "fr",
   [
     { locale: "en", name: "English" },
     { locale: "fr", name: "Français" },
