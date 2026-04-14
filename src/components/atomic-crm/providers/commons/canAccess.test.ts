@@ -39,12 +39,12 @@ describe("canAccess", () => {
     });
 
     it("can read and write companies", () => {
-      expect(
-        canAccess("user", { action: "list", resource: "companies" }),
-      ).toBe(true);
-      expect(
-        canAccess("user", { action: "edit", resource: "companies" }),
-      ).toBe(true);
+      expect(canAccess("user", { action: "list", resource: "companies" })).toBe(
+        true,
+      );
+      expect(canAccess("user", { action: "edit", resource: "companies" })).toBe(
+        true,
+      );
     });
 
     it("can read and write deals", () => {
