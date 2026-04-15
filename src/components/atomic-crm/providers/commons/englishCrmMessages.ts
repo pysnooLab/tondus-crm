@@ -365,6 +365,27 @@ export const englishCrmMessages = {
         name_placeholder: "Enter tag name",
       },
     },
+    tondeuses: {
+      name: "Tondeuse |||| Tondeuses",
+      forcedCaseName: "Tondeuse",
+      fields: {
+        nom: "Name",
+        prix: "Price",
+        description: "Description",
+        actif: "Active",
+        date_creation: "Creation date",
+        date_fin: "End date",
+      },
+      action: {
+        create: "Create tondeuse",
+        edit: "Edit tondeuse",
+        show: "Show tondeuse",
+      },
+      actif_status: {
+        active: "Active",
+        inactive: "Inactive",
+      },
+    },
   },
   crm: {
     action: {

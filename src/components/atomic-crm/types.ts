@@ -153,6 +153,15 @@ export type Task = {
   sales_id?: Identifier;
 } & Pick<RaRecord, "id">;
 
+export type Tondeuse = {
+  nom: string;
+  prix: number;
+  description?: string;
+  actif: boolean;
+  date_creation?: string;
+  date_fin?: string | null;
+} & Pick<RaRecord, "id">;
+
 export type ActivityCompanyCreated = {
   type: typeof COMPANY_CREATED;
   company_id: Identifier;
