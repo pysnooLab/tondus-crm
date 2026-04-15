@@ -15,7 +15,11 @@ const TABLES = [
   "deals",
   "contacts",
   "companies",
-  "tondeuses",
+  "parc_contrat",
+  "parc_tondeuse",
+  "parc",
+  "contrat_entretien",
+  "tondeuse",
   "tags",
   "favicons_excluded_domains",
   "configuration",
@@ -141,6 +145,28 @@ async function createCompany({
   return data;
 }
 
+async function createTondeuse({
+  nom,
+  prix,
+  actif = true,
+}: {
+  nom: string;
+  prix: number;
+  actif?: boolean;
+}) {
+  const { data, error } = await adminSupabase
+    .from("tondeuse")
+    .insert({ nom, prix, actif })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create tondeuse: ${error.message}`);
+  }
+
+  return data;
+}
+
 async function createContact({
   first_name,
   last_name,
@@ -219,6 +245,7 @@ export const test = base.extend<{
   createCompany: typeof createCompany;
   createContact: typeof createContact;
   createNotes: typeof createNotes;
+  createTondeuse: typeof createTondeuse;
   menu: ReturnType<typeof getMenuMethod>;
   dismissToast: (content: string) => Promise<void>;
 }>({
@@ -251,6 +278,10 @@ export const test = base.extend<{
   // eslint-disable-next-line no-empty-pattern
   createNotes: async ({}, cb) => {
     await cb(createNotes);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createTondeuse: async ({}, cb) => {
+    await cb(createTondeuse);
   },
   menu: async ({ page, isMobile }, cb) => {
     await cb(getMenuMethod({ page, isMobile }));

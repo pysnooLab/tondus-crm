@@ -1,6 +1,52 @@
 import { test, expect } from "./fixtures";
 
 test.describe("Tondeuse CRUD", () => {
+  test("non-admin user cannot see delete button on tondeuse show page", async ({
+    page,
+    createUser,
+    createSales,
+    createTondeuse,
+  }) => {
+    // Arrange: create an admin (first user) so subsequent users are non-admin
+    await createUser({
+      email: "admin@test.com",
+      password: "password",
+    });
+
+    // Create a non-admin sales user
+    await createSales({
+      email: "user@test.com",
+      password: "password",
+      first_name: "Regular",
+      last_name: "User",
+    });
+
+    // Create a tondeuse via the admin supabase client
+    const tondeuse = await createTondeuse({
+      nom: "Tondeuse Test",
+      prix: 199.99,
+    });
+
+    // Act: sign in as the non-admin user
+    await page.goto("http://localhost:5175/");
+    await page.getByLabel("Email").fill("user@test.com");
+    await page.getByLabel("Password").fill("password");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.waitForLoadState("networkidle");
+
+    // Navigate to the tondeuse show page
+    await page.goto(`http://localhost:5175/#/tondeuses/${tondeuse.id}/show`);
+    await page.waitForLoadState("networkidle");
+
+    // Assert: tondeuse details should be visible
+    await expect(page.getByText("Tondeuse Test")).toBeVisible();
+
+    // Assert: delete button should NOT be visible for non-admin
+    await expect(
+      page.getByRole("button", { name: /Delete|Supprimer/ }),
+    ).not.toBeVisible();
+  });
+
   test("admin can create, view, edit, and see delete button for a tondeuse", async ({
     page,
     dismissToast,
