@@ -58,9 +58,7 @@ const PeriodiciteBadge = ({
   const translate = useTranslate();
   return (
     <Badge variant="outline">
-      {translate(
-        `resources.contrats_entretien.periodicite_choices.${value}`,
-      )}
+      {translate(`resources.contrats_entretien.periodicite_choices.${value}`)}
     </Badge>
   );
 };

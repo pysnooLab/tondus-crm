@@ -83,9 +83,7 @@ test.describe("Tondeuse CRUD", () => {
     await expect(page.getByText("Tondeuse Pro 3000")).toBeVisible();
     await expect(page.getByText("299.99")).toBeVisible();
     await expect(page.getByText("Actif", { exact: true })).toBeVisible();
-    await expect(
-      page.getByText("Tondeuse professionnelle"),
-    ).toBeVisible();
+    await expect(page.getByText("Tondeuse professionnelle")).toBeVisible();
 
     // Delete button should be visible for admin
     await expect(

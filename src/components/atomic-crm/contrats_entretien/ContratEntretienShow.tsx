@@ -59,9 +59,7 @@ const ContratEntretienShowContent = () => {
 
               <div>
                 <p className="text-sm text-muted-foreground">
-                  {translate(
-                    "resources.contrats_entretien.fields.periodicite",
-                  )}
+                  {translate("resources.contrats_entretien.fields.periodicite")}
                 </p>
                 <Badge variant="outline">
                   {translate(

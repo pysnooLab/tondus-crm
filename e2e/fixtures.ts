@@ -186,7 +186,15 @@ async function createContratEntretien({
 }) {
   const { data, error } = await adminSupabase
     .from("contrats_entretien")
-    .insert({ nom, periodicite, prix, date_debut, date_fin, statut, tondeuse_id })
+    .insert({
+      nom,
+      periodicite,
+      prix,
+      date_debut,
+      date_fin,
+      statut,
+      tondeuse_id,
+    })
     .select("id")
     .single();
 
