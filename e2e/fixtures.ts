@@ -18,7 +18,7 @@ const TABLES = [
   "parc_contrat",
   "parc_tondeuse",
   "parc",
-  "contrat_entretien",
+  "contrats_entretien",
   "tondeuses",
   "tags",
   "favicons_excluded_domains",
@@ -167,6 +167,36 @@ async function createTondeuse({
   return data;
 }
 
+async function createContratEntretien({
+  nom,
+  periodicite,
+  prix,
+  date_debut,
+  date_fin,
+  statut = "actif",
+  tondeuse_id = null,
+}: {
+  nom: string;
+  periodicite: "semestrielle" | "annuelle";
+  prix: number;
+  date_debut: string;
+  date_fin: string;
+  statut?: "actif" | "expire";
+  tondeuse_id?: string | null;
+}) {
+  const { data, error } = await adminSupabase
+    .from("contrats_entretien")
+    .insert({ nom, periodicite, prix, date_debut, date_fin, statut, tondeuse_id })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create contrat entretien: ${error.message}`);
+  }
+
+  return data;
+}
+
 async function createContact({
   first_name,
   last_name,
@@ -246,6 +276,7 @@ export const test = base.extend<{
   createContact: typeof createContact;
   createNotes: typeof createNotes;
   createTondeuse: typeof createTondeuse;
+  createContratEntretien: typeof createContratEntretien;
   menu: ReturnType<typeof getMenuMethod>;
   dismissToast: (content: string) => Promise<void>;
 }>({
@@ -282,6 +313,10 @@ export const test = base.extend<{
   // eslint-disable-next-line no-empty-pattern
   createTondeuse: async ({}, cb) => {
     await cb(createTondeuse);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createContratEntretien: async ({}, cb) => {
+    await cb(createContratEntretien);
   },
   menu: async ({ page, isMobile }, cb) => {
     await cb(getMenuMethod({ page, isMobile }));
