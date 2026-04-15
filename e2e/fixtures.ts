@@ -19,7 +19,7 @@ const TABLES = [
   "parc_tondeuse",
   "parc",
   "contrat_entretien",
-  "tondeuse",
+  "tondeuses",
   "tags",
   "favicons_excluded_domains",
   "configuration",
@@ -155,7 +155,7 @@ async function createTondeuse({
   actif?: boolean;
 }) {
   const { data, error } = await adminSupabase
-    .from("tondeuse")
+    .from("tondeuses")
     .insert({ nom, prix, actif })
     .select("id")
     .single();
