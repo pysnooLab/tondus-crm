@@ -392,6 +392,32 @@ export const frenchCrmMessages = {
         inactive: "Inactif",
       },
     },
+    contrats_entretien: {
+      name: "Contrat d'entretien |||| Contrats d'entretien",
+      forcedCaseName: "Contrat d'entretien",
+      fields: {
+        nom: "Nom",
+        periodicite: "Périodicité",
+        prix: "Prix",
+        date_debut: "Date de début",
+        date_fin: "Date de fin",
+        statut: "Statut",
+        tondeuse_id: "Tondeuse",
+      },
+      action: {
+        create: "Créer un contrat d'entretien",
+        edit: "Modifier le contrat d'entretien",
+        show: "Afficher le contrat d'entretien",
+      },
+      periodicite_choices: {
+        semestrielle: "Semestrielle",
+        annuelle: "Annuelle",
+      },
+      statut_choices: {
+        actif: "Actif",
+        expire: "Expiré",
+      },
+    },
   },
   crm: {
     action: {

@@ -386,6 +386,32 @@ export const englishCrmMessages = {
         inactive: "Inactive",
       },
     },
+    contrats_entretien: {
+      name: "Maintenance contract |||| Maintenance contracts",
+      forcedCaseName: "Maintenance contract",
+      fields: {
+        nom: "Name",
+        periodicite: "Frequency",
+        prix: "Price",
+        date_debut: "Start date",
+        date_fin: "End date",
+        statut: "Status",
+        tondeuse_id: "Tondeuse",
+      },
+      action: {
+        create: "Create maintenance contract",
+        edit: "Edit maintenance contract",
+        show: "Show maintenance contract",
+      },
+      periodicite_choices: {
+        semestrielle: "Semi-annual",
+        annuelle: "Annual",
+      },
+      statut_choices: {
+        actif: "Active",
+        expire: "Expired",
+      },
+    },
   },
   crm: {
     action: {

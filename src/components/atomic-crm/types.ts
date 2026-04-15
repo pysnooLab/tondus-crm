@@ -162,6 +162,16 @@ export type Tondeuse = {
   date_fin?: string | null;
 } & Pick<RaRecord, "id">;
 
+export type ContratEntretien = {
+  nom: string;
+  periodicite: "semestrielle" | "annuelle";
+  prix: number;
+  date_debut: string;
+  date_fin: string;
+  statut: "actif" | "expire";
+  tondeuse_id?: Identifier | null;
+} & Pick<RaRecord, "id">;
+
 export type ActivityCompanyCreated = {
   type: typeof COMPANY_CREATED;
   company_id: Identifier;

@@ -21,6 +21,7 @@ import { Dashboard } from "../dashboard/Dashboard";
 import { MobileDashboard } from "../dashboard/MobileDashboard";
 import deals from "../deals";
 import tondeuses from "../tondeuses";
+import contrats_entretien from "../contrats_entretien";
 import { Layout } from "../layout/Layout";
 import { MobileLayout } from "../layout/MobileLayout";
 import { SignupPage } from "../login/SignupPage";
@@ -268,6 +269,7 @@ const DesktopAdmin = (
       <Resource name="contacts" {...contacts} />
       <Resource name="companies" {...companies} />
       <Resource name="tondeuses" {...tondeuses} />
+      <Resource name="contrats_entretien" {...contrats_entretien} />
       <Resource name="contact_notes" />
       <Resource name="deal_notes" />
       <Resource name="tasks" />
