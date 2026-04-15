@@ -1,9 +1,7 @@
 import { CanAccess, ShowBase, useShowContext, useTranslate } from "ra-core";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router";
-import { Pencil } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { EditButton } from "@/components/admin/edit-button";
 import { DeleteButton } from "@/components/admin/delete-button";
 
 import type { Tondeuse } from "../types";
@@ -32,12 +30,7 @@ const TondeuseShowContent = () => {
             <div className="flex items-center justify-between mb-6">
               <h5 className="text-xl font-semibold">{record.nom}</h5>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" asChild>
-                  <Link to={`/tondeuses/${record.id}`}>
-                    <Pencil className="size-4 mr-1" />
-                    {translate("ra.action.edit")}
-                  </Link>
-                </Button>
+                <EditButton />
                 <CanAccess resource="tondeuses" action="delete">
                   <DeleteButton />
                 </CanAccess>
